@@ -76,14 +76,12 @@ jobs:
 
       # debug
       - run: ls
+      - run: cat "$DIR/$FILE"
 
       - name: cosign verify-blob
         run: |
           cosign verify-blob \
             "$DIR/$FILE" \
             --bundle "${DIR}/${FILE}.bundle" \
-            --certificate-identity-regexp 'https://github\.com/${GITHUB_REPOSITORY}/\.github/workflows/test\.yaml' \
+            --certificate-identity "https://github.com/${GITHUB_REPOSITORY}/.github/workflows/test.yaml" \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
-
-      # debug
-      - run: cat "$DIR/$FILE"

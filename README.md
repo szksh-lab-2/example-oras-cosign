@@ -1,0 +1,1 @@
+# example-oras-cosign

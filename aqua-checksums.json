@@ -1,0 +1,59 @@
+{
+  "checksums": [
+    {
+      "id": "github_release/github.com/oras-project/oras/v1.3.0/oras_1.3.0_darwin_amd64.tar.gz",
+      "checksum": "82C33F7DA8430EA7FA7E7BDF7721BE0A0D0481E5CCB2472EA438490D5E8641A9",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/oras-project/oras/v1.3.0/oras_1.3.0_darwin_arm64.tar.gz",
+      "checksum": "E10C6552C02D5A7C7EAF7170D3B6F7F094B675A98A1E0EDF4D4478A909447245",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/oras-project/oras/v1.3.0/oras_1.3.0_linux_amd64.tar.gz",
+      "checksum": "6CDC692F929100FEB08AA8DE584D02F7BCC30EC7D88BC2ADC2054D782DB57C64",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/oras-project/oras/v1.3.0/oras_1.3.0_linux_arm64.tar.gz",
+      "checksum": "7649738B48FDE10542BCC8B0E9B460BA83936C75FB5BE01EE6D4443764A14352",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/oras-project/oras/v1.3.0/oras_1.3.0_windows_amd64.zip",
+      "checksum": "B050E93AA0DC7A79A61FA8E4074DFA302C41D4AF01B634FE393C5DD687536AEE",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/sigstore/cosign/v3.0.2/cosign-darwin-amd64",
+      "checksum": "0FC2B6F16B900ABDFDA3153B11FC435A8CBE3830E8E820FE8AD5FE4149A5B472",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/sigstore/cosign/v3.0.2/cosign-darwin-arm64",
+      "checksum": "3823B044DE184DA21E300BC5E20DD29D3FA9243AF3BA70C4A5DA1712F3385D46",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/sigstore/cosign/v3.0.2/cosign-linux-amd64",
+      "checksum": "46DBDCB5467A3DFEC2526923D0B3365E40C8D9DC00EC23D5ACA3437449E8CBFD",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/sigstore/cosign/v3.0.2/cosign-linux-arm64",
+      "checksum": "17FD784737CA54D7D8A343C82DA6C5D6DBDEE971E66644D923D1B057FB97D7ED",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "github_release/github.com/sigstore/cosign/v3.0.2/cosign-windows-amd64.exe",
+      "checksum": "7A137280D8686665CEB4D8565DF2A0AC63F28031E014CDCAE5D56891A6C8A400",
+      "algorithm": "sha256"
+    },
+    {
+      "id": "registries/github_content/github.com/aquaproj/aqua-registry/v4.435.0/registry.yaml",
+      "checksum": "A595E83217FC0E29403C6BD36C014D2BD96AF345DF565D55D387E42991D2B983",
+      "algorithm": "sha256"
+    }
+  ]
+}

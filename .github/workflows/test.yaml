@@ -1,0 +1,89 @@
+---
+name: test
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+env:
+  AQUA_LOG_COLOR: always
+jobs:
+  push:
+    runs-on: ubuntu-24.04
+    permissions:
+      packages: write # required for pushing to GHCR
+      id-token: write # required for cosign
+    timeout-minutes: 10
+    env:
+      FILE: date.txt
+      DIR: dist
+      TARBALL: dist.tar.gz
+    steps:
+      - uses: actions/checkout@71cf2267d89c5cb81562390fa70a37fa40b1305e # v6-beta
+        with:
+          persist-credentials: false
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
+        with:
+          aqua_version: v2.55.1
+          aqua_opts: ""
+      - run: mkdir "$DIR"
+      - run: date > "$DIR/$FILE"
+
+      # debug
+      - run: cat "$DIR/$FILE"
+
+      - name: cosign sign-blob
+        run: |
+          cosign sign-blob "$DIR/$FILE" \
+            -y \
+            --bundle "${DIR}/${FILE}.bundle" \
+            --oidc-provider github
+      - run: tar -czf "$TARBALL" "$DIR"
+      - name: oras push
+        env:
+          GITHUB_TOKEN: ${{github.token}}
+        run: |
+          echo "$GITHUB_TOKEN" |
+            oras push -u octokit --password-stdin \
+              "ghcr.io/$GITHUB_REPOSITORY/${TARBALL}:latest" "$TARBALL"
+
+  pull:
+    runs-on: ubuntu-24.04
+    needs: push
+    permissions:
+      packages: read # required for pulling from GHCR
+    timeout-minutes: 10
+    env:
+      FILE: date.txt
+      DIR: dist
+      TARBALL: dist.tar.gz
+    steps:
+      - uses: actions/checkout@71cf2267d89c5cb81562390fa70a37fa40b1305e # v6-beta
+        with:
+          persist-credentials: false
+      - uses: aquaproj/aqua-installer@11dd79b4e498d471a9385aa9fb7f62bb5f52a73c # v4.0.4
+        with:
+          aqua_version: v2.55.1
+          aqua_opts: ""
+      - name: oras pull
+        env:
+          GITHUB_TOKEN: ${{github.token}}
+        run: |
+          echo "$GITHUB_TOKEN" |
+            oras pull -u octokit --password-stdin \
+              "ghcr.io/$GITHUB_REPOSITORY/${TARBALL}:latest"
+      - run: tar -xzf "$TARBALL"
+
+      # debug
+      - run: ls
+
+      - name: cosign verify-blob
+        run: |
+          cosign verify-blob \
+            "$DIR/$FILE" \
+            --bundle "${DIR}/${FILE}.bundle" \
+            --certificate-identity-regexp 'https://github\.com/${GITHUB_REPOSITORY}/\.github/workflows/test\.yaml' \
+            --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
+
+      # debug
+      - run: cat "$DIR/$FILE"

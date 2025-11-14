@@ -83,5 +83,5 @@ jobs:
           cosign verify-blob \
             "$DIR/$FILE" \
             --bundle "${DIR}/${FILE}.bundle" \
-            --certificate-identity "https://github.com/${GITHUB_REPOSITORY}/.github/workflows/test.yaml" \
+            --certificate-identity "https://github.com/${GITHUB_REPOSITORY}/.github/workflows/test.yaml@refs/heads/main" \
             --certificate-oidc-issuer "https://token.actions.githubusercontent.com"
